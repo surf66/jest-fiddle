@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App should display a message when submitted is true 1`] = `
+<div>
+  <p>
+    App
+  </p>
+  <p>
+    Submitted, thanks
+  </p>
+</div>
+`;
+
+exports[`App should render a submit button 1`] = `
+<div>
+  <p>
+    App
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Submit
+  </button>
+</div>
+`;
