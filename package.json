@@ -7,6 +7,14 @@
     "test": "jest",
     "start": "webpack-dev-server --inline --no-info --content-base ./web"
   },
+  "jest": {
+    "setupFiles": [
+      "./tests/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -24,6 +32,9 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
     "jest": "^23.1.0",
     "react-test-renderer": "^16.4.0"
   }

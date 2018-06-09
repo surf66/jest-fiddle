@@ -1,5 +1,7 @@
 import React from 'react';
-import Button from './button.component';
+import NoteList from './note-list.component';
+import Form from './form.component';
+import NotesService from '../services/notes.service';
 
 export default class App extends React.Component {
 
@@ -7,21 +9,30 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      submitted: false
+      notes: []
     }
+
+    this._onSubmit = this._onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    let notes = NotesService.listNotes();
+    this.setState({ notes: notes });
   }
 
   render() {
     return (
       <div>
-        <p>App</p>
-        {!this.state.submitted && <Button buttonText="Submit" onClick={this._handleClick.bind(this)} /> }
-        {this.state.submitted && <p>Submitted, thanks</p> }
+        <p>Notes</p>
+        <NoteList notes={this.state.notes} />
+        <Form onSubmit={this._onSubmit} />
       </div>
     )
   }
 
-  _handleClick() {
-    this.setState({ submitted: !this.state.submitted });
+  _onSubmit(newNote) {
+    let notes = this.state.notes;
+    notes.push(newNote);
+    this.setState({ notes: notes });
   }
 }

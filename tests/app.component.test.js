@@ -1,19 +1,17 @@
 import React from 'react';
 import App from '../src/js/components/app.component.js';
-import renderer from 'react-test-renderer';
 
-test('App should render a submit button', () => {
-  const component = renderer.create(<App />);
-
-  let tree = component.toJSON();
+test('App component snapshot test', () => {
+  const tree = shallow(<App />);
+  
   expect(tree).toMatchSnapshot();
 });
 
-test('App should display a message when submitted is true', () => {
-  const component = renderer.create(<App />);
+test('should update notes when _onSubmit is called', () => {
+  const component = shallow(<App />).instance();
+  
+  component.setState({ notes: [] });
+  component._onSubmit('new note');
 
-  component.getInstance().setState({ submitted: true });
-
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  expect(component.state.notes[0]).toEqual('new note');
 });
