@@ -4,6 +4,7 @@ const path = require('path');
 
 var stockSearchConfig = {
   entry: [
+    'babel-polyfill',
     './src/js/index.js'
   ],
   output: {
@@ -22,7 +23,7 @@ var stockSearchConfig = {
         use: {
           loader: 'babel-loader',
           options: {
-          presets: ['es2015', 'react']
+          presets: ['es2017', 'react']
           }
         }
       }

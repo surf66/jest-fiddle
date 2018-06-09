@@ -9,15 +9,16 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      notes: []
+      notes: [],
+      status: "loading"
     }
 
     this._onSubmit = this._onSubmit.bind(this);
   }
 
-  componentDidMount() {
-    let notes = NotesService.listNotes();
-    this.setState({ notes: notes });
+  async componentDidMount() {
+    let notes = await NotesService.listNotes();
+    this.setState({ notes: notes, status: '' });
   }
 
   render() {
@@ -25,6 +26,7 @@ export default class App extends React.Component {
       <div>
         <p>Notes</p>
         <NoteList notes={this.state.notes} />
+        {this.state.status === 'loading' && <p>Retreiving your notes...</p>}
         <Form onSubmit={this._onSubmit} />
       </div>
     )

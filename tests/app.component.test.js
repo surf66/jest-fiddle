@@ -1,10 +1,18 @@
 import React from 'react';
 import App from '../src/js/components/app.component.js';
+import NotesService from '../src/js/services/notes.service';
 
-test('App component snapshot test', () => {
+test('app component default state snapshot test', () => {
   const tree = shallow(<App />);
   
   expect(tree).toMatchSnapshot();
+});
+
+test('should call notes service on componentDidMount', () => {
+  const notesServiceSpy = jest.spyOn(NotesService, 'listNotes');
+  mount(<App />);
+  
+  expect(notesServiceSpy).toHaveBeenCalledWith();
 });
 
 test('should update notes when _onSubmit is called', () => {
